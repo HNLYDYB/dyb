@@ -69,7 +69,7 @@ public class InfApiAccessLogBaseVO {
     @NotNull(message = "结果码不能为空")
     private Integer resultCode;
 
-    @ApiModelProperty(value = "结果提示", example = "芋道源码，牛逼！")
+    @ApiModelProperty(value = "结果提示", example = "源码，牛逼！")
     private String resultMsg;
 
 }

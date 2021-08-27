@@ -208,7 +208,7 @@ public class SysSmsTemplateServiceTest extends BaseDbUnitTest {
            o.setType(SysSmsTemplateTypeEnum.PROMOTION.getType());
            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
            o.setCode("yudaoyuanma");
-           o.setContent("芋道源码");
+           o.setContent("源码");
            o.setApiTemplateId("yunai");
            o.setChannelId(1L);
            o.setCreateTime(buildTime(2021, 11, 11));

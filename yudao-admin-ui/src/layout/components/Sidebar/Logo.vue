@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '芋道管理系统',
+      title: '赋值规则管理系统',
       logo: logoImg
     }
   }
