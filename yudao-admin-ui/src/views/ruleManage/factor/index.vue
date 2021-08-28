@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { create, update, deletefactor, get, getPage, exportExcel,getJudgetypeList } from "@/api/ruleManage/factor";
+import { create, update, deletefactor, get, getPage, exportExcel } from "@/api/ruleManage/factor";
 import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict'
 export default {
   name: "",
@@ -130,7 +130,7 @@ export default {
       // 是否显示弹出层
       open: false,
       dateRangeCreateTime: [],
-      judgetypeDatas: getDictDatas(DICT_TYPE.SYS_MENU_TYPE),
+      judgetypeDatas: getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE),
       // 查询参数
       queryParams: {
         pageNo: 1,
