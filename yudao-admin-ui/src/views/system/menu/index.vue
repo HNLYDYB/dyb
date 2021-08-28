@@ -65,9 +65,9 @@
           <el-col :span="24">
             <el-form-item label="菜单类型" prop="type">
               <el-radio-group v-model="form.type">
-                <el-radio v-for="dict in menuTypeDictDatas" :key="parseInt(dict.value)" :label="parseInt(dict.value)">
-                  {{dict.label}}</el-radio>
-              </el-radio-group>
+              <el-radio v-for="dict in menuTypeDictDatas" :key="parseInt(dict.value)" :label="parseInt(dict.value)">
+                {{dict.label}}</el-radio>
+            </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="24">
