@@ -1,5 +1,5 @@
 /**
- * Created by 芋道源码
+ * Created by 源码
  *
  * 数据字典工具类
  */
@@ -28,7 +28,7 @@ export const DICT_TYPE = {
   INF_JOB_LOG_STATUS: 'inf_job_log_status',
   INF_API_ERROR_LOG_PROCESS_STATUS: 'inf_api_error_log_process_status',
 
-  TOOL_CODEGEN_TEMPLATE_TYPE: 'tool_codegen_template_type',
+  TOOL_CODEGEN_TEMPLATE_TYPE: 'tool_codegen_template_type', //可抄
 
   RULE_FACTOR_JUDGETYPE:'rule_factor_judgetype',
 }
@@ -40,8 +40,7 @@ export const DICT_TYPE = {
  * @returns {*|Array} 数据字典数组
  */
 export function getDictDatas(dictType) {
-  return store.getters.dict_datas[dictType] || []
-}
+  return store.getters.dict_datas[dictType] || []}
 
 export function getDictDataLabel(dictType, value) {
   // 获取 dictType 对应的数据字典数组

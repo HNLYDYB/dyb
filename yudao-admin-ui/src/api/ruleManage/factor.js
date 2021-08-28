@@ -54,10 +54,4 @@ export function exportExcel(query) {
 }
 
 
-// 获取岗位精简信息列表
-export function getJudgetypeList() {
-  return request({
-    url: '/ruleManage/factor/getJudgetypeList',
-    method: 'get'
-  })
-}
+

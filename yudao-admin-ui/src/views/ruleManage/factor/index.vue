@@ -9,28 +9,6 @@
       <el-form-item label="因子名称" prop="factorname">
         <el-input v-model="queryParams.factorname" placeholder="请输入因子名称" clearable size="small" @keyup.enter.native="handleQuery"/>
       </el-form-item>
-      <el-form-item label="因子类型" prop="factortype">
-        <el-select v-model="queryParams.factortype" placeholder="请选择因子类型" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="命中逻辑" prop="judgetype">
-        <el-select v-model="queryParams.judgetype" placeholder="请选择命中逻辑" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="显示顺序" prop="sort">
-        <el-input v-model="queryParams.sort" placeholder="请输入显示顺序" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="创建时间">
-        <el-date-picker v-model="dateRangeCreateTime" size="small" style="width: 240px" value-format="yyyy-MM-dd"
-                        type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期" />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -51,14 +29,20 @@
     </el-row>
 
     <!-- 列表 -->
-    <el-table v-loading="loading" :data="list">
-      <el-table-column label="主键" align="center" prop="id" />
+    <el-table v-loading="loading" :data="list" row-key="id">
       <el-table-column label="因子代码" align="center" prop="factorcode" />
       <el-table-column label="因子名称" align="center" prop="factorname" />
       <el-table-column label="因子类型" align="center" prop="factortype" />
-      <el-table-column label="命中逻辑" align="center" prop="judgetype" />
-      <el-table-column label="显示顺序" align="center" prop="sort" />
-      <el-table-column label="状态" align="center" prop="status" />
+      <el-table-column label="命中逻辑" align="center" prop="judgetype" width="80">
+        <template slot-scope="scope">
+          <span>{{ getDictDataLabel(DICT_TYPE.RULE_FACTOR_JUDGETYPE, scope.row.judgetype) }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="状态" align="center" prop="status" >
+        <template slot-scope="scope">
+          <span>{{ getDictDataLabel(DICT_TYPE.SYS_COMMON_STATUS, scope.row.status) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -92,7 +76,7 @@
         </el-form-item>
         <el-form-item label="命中逻辑" prop="judgetype">
           <el-radio-group v-model="form.judgetype">
-            <el-radio v-for="dict in judgetypeDatas" :key="parseInt(dict.value)" :label="parseInt(dict.value)">
+            <el-radio v-for="dict in  this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)" :key="dict.label" :label="dict.value">
               {{dict.label}}</el-radio>
           </el-radio-group>
         </el-form-item>
@@ -109,7 +93,7 @@
 </template>
 
 <script>
-import { create, update, deletefactor, get, getPage, exportExcel } from "@/api/ruleManage/factor";
+import { create, update, deletefactor, get, getList,getPage, exportExcel } from "@/api/ruleManage/factor";
 import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict'
 export default {
   name: "",
@@ -130,17 +114,12 @@ export default {
       // 是否显示弹出层
       open: false,
       dateRangeCreateTime: [],
-      judgetypeDatas: getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE),
       // 查询参数
       queryParams: {
         pageNo: 1,
         pageSize: 10,
         factorcode: null,
         factorname: null,
-        factortype: null,
-        judgetype: null,
-        sort: null,
-        status: null,
       },
       // 表单参数
       form: {},
@@ -174,12 +153,8 @@ export default {
     /** 表单重置 */
     reset() {
       this.form = {
-        id: undefined,
         factorcode: undefined,
         factorname: undefined,
-        factortype: undefined,
-        judgetype: undefined,
-        sort: undefined,
       };
       this.resetForm("form");
     },
@@ -197,14 +172,14 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
-      this.getTreeselect();
+
       this.open = true;
       this.title = "添加因子配置";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      this.getTreeselect();
+
       const id = row.id;
       get(id).then(response => {
         this.form = response.data;

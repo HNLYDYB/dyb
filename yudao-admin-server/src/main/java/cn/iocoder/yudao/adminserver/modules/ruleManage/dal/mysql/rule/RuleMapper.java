@@ -5,8 +5,6 @@ import java.util.*;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.controller.rule.vo.RuleExportReqVO;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.controller.rule.vo.RulePageReqVO;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.dal.dataobject.rule.RuleDO;
-import cn.iocoder.yudao.adminserver.modules.system.controller.auth.vo.session.SysUserSessionPageReqVO;
-import cn.iocoder.yudao.adminserver.modules.system.dal.dataobject.auth.SysUserSessionDO;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.mybatis.core.query.QueryWrapperX;
 import cn.iocoder.yudao.framework.mybatis.core.mapper.BaseMapperX;

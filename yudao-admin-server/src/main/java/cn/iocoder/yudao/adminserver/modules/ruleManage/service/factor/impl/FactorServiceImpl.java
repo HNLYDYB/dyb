@@ -8,6 +8,7 @@ import cn.iocoder.yudao.adminserver.modules.ruleManage.convert.factor.FactorConv
 import cn.iocoder.yudao.adminserver.modules.ruleManage.dal.dataobject.factor.FactorDO;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.dal.mysql.factor.FactorMapper;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.service.factor.FactorService;
+import cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
+
 
 /**
  * 因子配置 Service 实现类
@@ -56,7 +58,7 @@ public class FactorServiceImpl implements FactorService {
 
     private void validateExists(Long id) {
         if (factorMapper.selectById(id) == null) {
-           // throw exception(_NOT_EXISTS);
+            //throw ServiceExceptionUtil.exception(RULE_NOT_EXISTS);
         }
     }
 

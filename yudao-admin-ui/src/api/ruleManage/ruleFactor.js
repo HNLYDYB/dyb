@@ -1,52 +1,52 @@
 import request from '@/utils/request'
 
-// 创建规则管理
+// 创建规则使用因子
 export function create(data) {
   return request({
-    url: '/ruleManage//create',
+    url: '/RuleFactor//create',
     method: 'post',
     data: data
   })
 }
 
-// 更新规则管理
+// 更新规则使用因子
 export function update(data) {
   return request({
-    url: '/ruleManage//update',
+    url: '/RuleFactor//update',
     method: 'put',
     data: data
   })
 }
 
-// 删除规则管理
-export function delete(id) {
+// 删除规则使用因子
+export function del(id) {
   return request({
-    url: '/ruleManage//delete?id=' + id,
+    url: '/RuleFactor//delete?id=' + id,
     method: 'delete'
   })
 }
 
-// 获得规则管理
+// 获得规则使用因子
 export function get(id) {
   return request({
-    url: '/ruleManage//get?id=' + id,
+    url: '/RuleFactor//get?id=' + id,
     method: 'get'
   })
 }
 
-// 获得规则管理分页
+// 获得规则使用因子分页
 export function getPage(query) {
   return request({
-    url: '/ruleManage//page',
+    url: '/RuleFactor//page',
     method: 'get',
     params: query
   })
 }
 
-// 导出规则管理 Excel
+// 导出规则使用因子 Excel
 export function exportExcel(query) {
   return request({
-    url: '/ruleManage//export-excel',
+    url: '/RuleFactor//export-excel',
     method: 'get',
     params: query,
     responseType: 'blob'
