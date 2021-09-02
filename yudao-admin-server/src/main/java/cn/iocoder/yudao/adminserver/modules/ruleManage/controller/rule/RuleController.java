@@ -4,6 +4,8 @@ import cn.iocoder.yudao.adminserver.modules.ruleManage.controller.rule.vo.*;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.convert.rule.RuleConvert;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.dal.dataobject.rule.RuleDO;
 import cn.iocoder.yudao.adminserver.modules.ruleManage.service.rule.RuleService;
+import cn.iocoder.yudao.adminserver.modules.system.controller.auth.vo.auth.SysAuthLoginReqVO;
+import cn.iocoder.yudao.adminserver.modules.system.controller.auth.vo.auth.SysAuthLoginRespVO;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
 import cn.iocoder.yudao.framework.excel.core.util.ExcelUtils;
@@ -21,8 +23,11 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
+import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getClientIP;
+import static cn.iocoder.yudao.framework.common.util.servlet.ServletUtils.getUserAgent;
 import static cn.iocoder.yudao.framework.operatelog.core.enums.OperateTypeEnum.EXPORT;
 
 @Api(tags = "规则管理")
@@ -66,6 +71,14 @@ public class RuleController {
         RuleDO rule= ruleService.getRule(id);
         return success(RuleConvert.INSTANCE.convert(rule));
     }
+    @GetMapping("/getRulebyNo")
+    @ApiOperation("获得规则管理")
+    @ApiImplicitParam(name = "id", value = "编号", required = true, example = "1024", dataTypeClass = Long.class)
+    @PreAuthorize("@ss.hasPermission('ruleManage::query')")
+    public CommonResult<RuleRespVO> getRulebyNo(@RequestParam("ruleno") String ruleno) {
+        RuleDO rule= ruleService.getRulebyNo(ruleno);
+        return success(RuleConvert.INSTANCE.convert(rule));
+    }
 
     @GetMapping("/list")
     @ApiOperation("获得规则管理列表")
@@ -95,5 +108,17 @@ public class RuleController {
         List<RuleExcelVO> datas = RuleConvert.INSTANCE.convertList02(list);
         ExcelUtils.write(response, "规则管理.xls", "数据", RuleExcelVO.class, datas);
     }
+
+
+    @GetMapping("/getRuleNo")
+    @ApiOperation("生成规则号")
+    public CommonResult<RuleRespVO> getRuleNo() {
+        UUID ruleno = UUID.randomUUID();
+        RuleRespVO ruleRespVO = new RuleRespVO();
+        ruleRespVO.setRuleno( ruleno.toString().replaceAll("-","") );
+        // 返回结果
+        return success(ruleRespVO);
+    }
+
 
 }

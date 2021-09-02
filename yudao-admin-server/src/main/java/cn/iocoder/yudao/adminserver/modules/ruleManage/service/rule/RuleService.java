@@ -72,4 +72,5 @@ public interface RuleService {
      */
     List<RuleDO> getList(RuleExportReqVO exportReqVO);
 
+    RuleDO getRulebyNo(String ruleno);
 }

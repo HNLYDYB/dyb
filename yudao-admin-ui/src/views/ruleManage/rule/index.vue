@@ -41,11 +41,11 @@
 
     <!-- 列表 -->
     <el-table v-loading="loading" :data="list" row-key="id">
-      <el-table-column label="规则号" align="center" prop="ruleno" />
+      <el-table-column label="规则主键" align="center" prop="id" />
 
       <el-table-column label="规则号" align="center" :show-overflow-tooltip="true">
         <template slot-scope="scope">
-          <router-link :to="'/ruleManage/rulefactor/index/' + scope.row.id" class="link-type">
+          <router-link  :to="{ path: '/ruleManage/ruleFactor', query: { ruleno: scope.row.ruleno } }"  class="link-type">
             <span>{{ scope.row.ruleno }}</span>
           </router-link>
         </template>
@@ -86,8 +86,8 @@
     <!-- 对话框(添加 / 修改) -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="规则号" prop="ruleno">
-          <el-input v-model="form.ruleno" placeholder="请输入规则号" />
+        <el-form-item label="规则号" prop="ruleno"  >
+          <el-input v-model="form.ruleno" :disabled="true" />
         </el-form-item>
         <el-form-item label="规则名称" prop="rulename">
           <el-input v-model="form.rulename" placeholder="请输入规则名称" />
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { createRule, updateRule, deleteRule, getRule, getPage, exportExcel } from "@/api/ruleManage/rule";
+import { createRule, updateRule, deleteRule, getRule, getPage, exportExcel,getRuleNo } from "@/api/ruleManage/rule";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
@@ -215,6 +215,9 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
+      getRuleNo().then(response => {
+        this.form.ruleno = response.data.ruleno;
+      });
       this.open = true;
       this.title = "添加规则管理";
     },

@@ -17,4 +17,6 @@ public class RuleRespVO extends RuleBaseVO {
     @ApiModelProperty(value = "创建时间", required = true)
     private Date createTime;
 
+    @ApiModelProperty(value = "规则号")
+    private String ruleno;
 }

@@ -80,4 +80,9 @@ public class RuleServiceImpl implements RuleService {
         return ruleMapper.selectList(exportReqVO);
     }
 
+    @Override
+    public RuleDO getRulebyNo(String ruleno) {
+        return ruleMapper.selectOne("ruleno", ruleno);
+    }
+
 }

@@ -94,6 +94,19 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/ruleManage',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'ruleFactor',
+        component: (resolve) => require(['@/views/ruleManage/ruleFactor/index'], resolve),
+        name: 'ruleFactor',
+        meta: { title: '规则因子维护', icon: '' }
+      }
+    ]
+  },
+  {
     path: '/job',
     component: Layout,
     hidden: true,

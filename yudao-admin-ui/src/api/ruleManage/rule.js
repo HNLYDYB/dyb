@@ -34,6 +34,12 @@ export function getRule(id) {
   })
 }
 
+export function getRulebyNo(ruleno) {
+  return request({
+    url: '/ruleManage/rule/getRulebyNo?ruleno=' + ruleno,
+    method: 'get'
+  })
+}
 // 获得规则管理分页
 export function getPage(query) {
   return request({
@@ -50,5 +56,13 @@ export function exportExcel(query) {
     method: 'get',
     params: query,
     responseType: 'blob'
+  })
+}
+
+// 获取规则号
+export function getRuleNo(query) {
+  return request({
+    url: '/ruleManage/rule/getRuleNo',
+    method: 'get'
   })
 }

@@ -3,42 +3,11 @@
 
     <!-- 搜索工作栏 -->
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="规则主键" prop="ruleid">
-        <el-input v-model="queryParams.ruleid" placeholder="请输入规则主键" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="规则号" prop="ruleno">
-        <el-input v-model="queryParams.ruleno" placeholder="请输入规则号" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="规则类型" prop="ruletype">
-        <el-select v-model="queryParams.ruletype" placeholder="请选择规则类型" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
       <el-form-item label="因子代码" prop="factcode">
         <el-input v-model="queryParams.factcode" placeholder="请输入因子代码" clearable size="small" @keyup.enter.native="handleQuery"/>
       </el-form-item>
       <el-form-item label="因子名称" prop="factname">
         <el-input v-model="queryParams.factname" placeholder="请输入因子名称" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="因子逻辑" prop="judgetype">
-        <el-select v-model="queryParams.judgetype" placeholder="请选择因子逻辑" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="命中值代码" prop="factvaluecode">
-        <el-input v-model="queryParams.factvaluecode" placeholder="请输入命中值代码" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="命中值逻辑" prop="factvaluename">
-        <el-input v-model="queryParams.factvaluename" placeholder="请输入命中值逻辑" clearable size="small" @keyup.enter.native="handleQuery"/>
-      </el-form-item>
-      <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="创建时间">
-        <el-date-picker v-model="dateRangeCreateTime" size="small" style="width: 240px" value-format="yyyy-MM-dd"
-                        type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -49,20 +18,13 @@
     <!-- 操作工具栏 -->
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd"
-                   v-hasPermi="['RuleFactor::create']">新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button type="warning" plain icon="el-icon-download" size="mini" @click="handleExport"
-                   v-hasPermi="['RuleFactor::export']">导出</el-button>
+        <el-button type="primary" plain icon="el-icon-plus" size="mini" @click="handleAdd">新增</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <!-- 列表 -->
     <el-table v-loading="loading" :data="list">
-      <el-table-column label="主键" align="center" prop="id" />
-      <el-table-column label="规则主键" align="center" prop="ruleid" />
       <el-table-column label="规则号" align="center" prop="ruleno" />
       <el-table-column label="规则类型" align="center" prop="ruletype" />
       <el-table-column label="因子代码" align="center" prop="factcode" />
@@ -78,10 +40,8 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)"
-                     v-hasPermi="['RuleFactor::update']">修改</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)"
-                     v-hasPermi="['RuleFactor::delete']">删除</el-button>
+          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)">修改</el-button>
+          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -92,16 +52,11 @@
     <!-- 对话框(添加 / 修改) -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="规则主键" prop="ruleid">
+        <el-form-item label="规则主键" prop="ruleid"  :hidden="true">
           <el-input v-model="form.ruleid" placeholder="请输入规则主键" />
         </el-form-item>
         <el-form-item label="规则号" prop="ruleno">
-          <el-input v-model="form.ruleno" placeholder="请输入规则号" />
-        </el-form-item>
-        <el-form-item label="规则类型" prop="ruletype">
-          <el-select v-model="form.ruletype" placeholder="请选择规则类型">
-            <el-option label="请选择字典生成" value="" />
-          </el-select>
+          <el-input v-model="form.ruleno" placeholder="请输入规则号"  :disabled="true" />
         </el-form-item>
         <el-form-item label="因子代码" prop="factcode">
           <el-input v-model="form.factcode" placeholder="请输入因子代码" />
@@ -120,11 +75,6 @@
         <el-form-item label="命中值逻辑" prop="factvaluename">
           <el-input v-model="form.factvaluename" placeholder="请输入命中值逻辑" />
         </el-form-item>
-        <el-form-item label="状态" prop="status">
-          <el-radio-group v-model="form.status">
-            <el-radio label="1">请选择字典生成</el-radio>
-          </el-radio-group>
-        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -135,10 +85,10 @@
 </template>
 
 <script>
-import { create, update, del, get, getPage, exportExcel } from "@/api/RuleFactor/";
-
+import { create, update, del, get, getPage } from "@/api/ruleManage/ruleFactor";
+import { getRulebyNo } from "@/api/ruleManage/rule";
 export default {
-  name: "",
+  name: "ruleFactor",
   components: {
   },
   data() {
@@ -156,6 +106,10 @@ export default {
       // 是否显示弹出层
       open: false,
       dateRangeCreateTime: [],
+      mainPageData: {
+        ruleid: null,
+        ruleno: null,
+      },
       // 查询参数
       queryParams: {
         pageNo: 1,
@@ -177,10 +131,23 @@ export default {
       }
     };
   },
+
   created() {
+    const ruleno = this.$route.query && this.$route.query.ruleno;
+    //新增时弹出框为父页面的
+    this.initRuleFactor(ruleno);
+    //绑定规则号，进行查询
+    this.queryParams.ruleno=ruleno;
     this.getList();
   },
   methods: {
+    /** 初始化规则因子 */
+    initRuleFactor(ruleno) {
+      getRulebyNo(ruleno).then(response => {
+        this.mainPageData.ruleno = response.data.ruleno;
+        this.mainPageData.ruleid = response.data.id;
+      });
+    },
     /** 查询列表 */
     getList() {
       this.loading = true;
@@ -230,7 +197,11 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加规则使用因子";
+      this.title = "添加规则因子";
+      this.form = {
+        ruleid: this.mainPageData.ruleid,
+        ruleno: this.mainPageData.ruleno,
+      };
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -239,7 +210,7 @@ export default {
       get(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改规则使用因子";
+        this.title = "修改规则因子";
       });
     },
     /** 提交按钮 */
@@ -277,24 +248,6 @@ export default {
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
-        })
-    },
-    /** 导出按钮操作 */
-    handleExport() {
-      // 处理查询参数
-      let params = {...this.queryParams};
-      params.pageNo = undefined;
-      params.pageSize = undefined;
-      this.addBeginAndEndTime(params, this.dateRangeCreateTime, 'createTime');
-      // 执行导出
-      this.$confirm('是否确认导出所有规则使用因子数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
-          return exportExcel(params);
-        }).then(response => {
-          this.downloadExcel(response, '规则使用因子.xls');
         })
     }
   }
