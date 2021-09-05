@@ -33,11 +33,7 @@
       <el-table-column label="因子代码" align="center" prop="factorcode" />
       <el-table-column label="因子名称" align="center" prop="factorname" />
       <el-table-column label="因子类型" align="center" prop="factortype" />
-      <el-table-column label="命中逻辑" align="center" prop="judgetype" width="80">
-        <template slot-scope="scope">
-          <span>{{ getDictDataLabel(DICT_TYPE.RULE_FACTOR_JUDGETYPE, scope.row.judgetype) }}</span>
-        </template>
-      </el-table-column>
+
       <el-table-column label="状态" align="center" prop="status" >
         <template slot-scope="scope">
           <span>{{ getDictDataLabel(DICT_TYPE.SYS_COMMON_STATUS, scope.row.status) }}</span>
@@ -73,12 +69,6 @@
         <el-form-item label="因子类型" prop="factortype">
           <el-input v-model="form.factortype" placeholder="请选择因子类型">
           </el-input>
-        </el-form-item>
-        <el-form-item label="命中逻辑" prop="judgetype">
-          <el-radio-group v-model="form.judgetype">
-            <el-radio v-for="dict in  this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)" :key="dict.label" :label="dict.value">
-              {{dict.label}}</el-radio>
-          </el-radio-group>
         </el-form-item>
         <el-form-item label="显示顺序" prop="sort">
           <el-input v-model="form.sort" placeholder="请输入显示顺序" />

@@ -32,30 +32,31 @@ public class RuleFactorDO extends BaseDO {
      * 规则号
      */
     private String ruleno;
+
     /**
-     * 规则类型
+     * 因子类型
      */
-    private String ruletype;
+    private String factortype;
     /**
      * 因子代码
      */
-    private String factcode;
+    private String factorcode;
     /**
      * 因子名称
      */
-    private String factname;
+    private String factorname;
     /**
      * 因子逻辑
      */
     private String judgetype;
     /**
-     * 命中值代码
+     * 命中值代码t
      */
-    private String factvaluecode;
+    private String factorvaluecode;
     /**
      * 命中值逻辑
      */
-    private String factvaluename;
+    private String factorvaluename;
     /**
      * 状态
      */

@@ -28,9 +28,11 @@ export const DICT_TYPE = {
   INF_JOB_LOG_STATUS: 'inf_job_log_status',
   INF_API_ERROR_LOG_PROCESS_STATUS: 'inf_api_error_log_process_status',
 
-  TOOL_CODEGEN_TEMPLATE_TYPE: 'tool_codegen_template_type', //可抄
+  TOOL_CODEGEN_TEMPLATE_TYPE: 'tool_codegen_template_type',
 
-  RULE_FACTOR_JUDGETYPE:'rule_factor_judgetype',
+  RULE_FACTOR_JUDGETYPE:'rule_factor_judgetype',// 因子命中逻辑
+  RULE_FACTOR_YPE:'rule_factor_type', //因子类型
+  RULE_PRIORITY:'rule_priority', //因子类型
 }
 
 /**
@@ -40,7 +42,8 @@ export const DICT_TYPE = {
  * @returns {*|Array} 数据字典数组
  */
 export function getDictDatas(dictType) {
-  return store.getters.dict_datas[dictType] || []}
+  return store.getters.dict_datas[dictType] || []
+}
 
 export function getDictDataLabel(dictType, value) {
   // 获取 dictType 对应的数据字典数组

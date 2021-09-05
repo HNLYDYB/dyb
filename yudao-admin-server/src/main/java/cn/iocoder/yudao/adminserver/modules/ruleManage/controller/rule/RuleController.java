@@ -115,7 +115,7 @@ public class RuleController {
     public CommonResult<RuleRespVO> getRuleNo() {
         UUID ruleno = UUID.randomUUID();
         RuleRespVO ruleRespVO = new RuleRespVO();
-        ruleRespVO.setRuleno( ruleno.toString().replaceAll("-","") );
+        ruleRespVO.setRuleno(ruleno.toString().replaceAll("\\-","") );
         // 返回结果
         return success(ruleRespVO);
     }

@@ -20,10 +20,6 @@
         <el-date-picker v-model="dateRangeEnddate" size="small" style="width: 240px" value-format="yyyy-MM-dd"
                         type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期" />
       </el-form-item>
-      <el-form-item label="创建时间">
-        <el-date-picker v-model="dateRangeCreateTime" size="small" style="width: 240px" value-format="yyyy-MM-dd"
-                        type="daterange" range-separator="-" start-placeholder="开始日期" end-placeholder="结束日期" />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -64,7 +60,7 @@
           <span>{{ parseTime(scope.row.enddate) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" align="center" prop="status" />
+      <el-table-column label="状态" align="center" prop="status"  :formatter="statusFormat"/>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -179,6 +175,10 @@ export default {
         this.total = response.data.total;
         this.loading = false;
       });
+    },
+    // 字典状态字典翻译
+    statusFormat(row, column) {
+      return getDictDataLabel(DICT_TYPE.SYS_COMMON_STATUS, row.status)
     },
     /** 取消按钮 */
     cancel() {

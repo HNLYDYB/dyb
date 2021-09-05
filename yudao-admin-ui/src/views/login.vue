@@ -48,7 +48,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2020-2021 iocoder.cn All Rights Reserved.</span>
+    <!--  <span>Copyright © 2020-2021 iocoder.cn All Rights Reserved.</span>-->
     </div>
   </div>
 </template>
@@ -140,13 +140,16 @@ export default {
 };
 </script>
 
+
 <style rel="stylesheet/scss" lang="scss">
+
 .login {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("http://static.yudao.iocoder.cn/login-background.jpg");
+  //background-image: url("http://static.yudao.iocoder.cn/login-background.jpg");
+  background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
 }
 .title {

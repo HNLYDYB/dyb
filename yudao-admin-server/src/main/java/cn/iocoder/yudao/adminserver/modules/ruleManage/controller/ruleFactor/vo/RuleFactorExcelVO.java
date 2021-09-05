@@ -27,19 +27,19 @@ public class RuleFactorExcelVO {
     private String ruletype;
 
     @ExcelProperty("因子代码")
-    private String factcode;
+    private String factorcode;
 
     @ExcelProperty("因子名称")
-    private String factname;
+    private String factorname;
 
     @ExcelProperty("因子逻辑")
     private String judgetype;
 
     @ExcelProperty("命中值代码")
-    private String factvaluecode;
+    private String factorvaluecode;
 
     @ExcelProperty("命中值逻辑")
-    private String factvaluename;
+    private String factorvaluename;
 
     @ExcelProperty("状态")
     private Integer status;

@@ -18,23 +18,25 @@ public class RuleFactorBaseVO {
     @ApiModelProperty(value = "规则号")
     private String ruleno;
 
-    @ApiModelProperty(value = "规则类型")
-    private String ruletype;
 
+
+
+    @ApiModelProperty(value = "因子类型")
+    private String factortype;
     @ApiModelProperty(value = "因子代码")
-    private String factcode;
+    private String factorcode;
 
     @ApiModelProperty(value = "因子名称")
-    private String factname;
+    private String factorname;
 
     @ApiModelProperty(value = "因子逻辑")
     private String judgetype;
 
     @ApiModelProperty(value = "命中值代码")
-    private String factvaluecode;
+    private String factorvaluecode;
 
     @ApiModelProperty(value = "命中值逻辑")
-    private String factvaluename;
+    private String factorvaluename;
 
     @ApiModelProperty(value = "状态")
     private Integer status;
