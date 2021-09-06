@@ -26,13 +26,25 @@
     <!-- 列表 -->
     <el-table v-loading="loading" :data="list">
       <el-table-column label="规则号" align="center" prop="ruleno" />
-      <el-table-column label="规则类型" align="center" prop="ruletype" />
+      <el-table-column label="因子类型" align="center" prop="factortype" >
+      <template slot-scope="scope">
+        <span>{{ getDictDataLabel(DICT_TYPE.RULE_FACTOR_YPE, scope.row.factortype) }}</span>
+      </template>
+      </el-table-column>
       <el-table-column label="因子代码" align="center" prop="factorcode" />
       <el-table-column label="因子名称" align="center" prop="factorname" />
-      <el-table-column label="因子逻辑" align="center" prop="judgetype" />
+      <el-table-column label="因子逻辑" align="center" prop="judgetype" >
+      <template slot-scope="scope">
+        <span>{{ getDictDataLabel(DICT_TYPE.RULE_FACTOR_JUDGETYPE, scope.row.judgetype) }}</span>
+      </template>
+      </el-table-column>
       <el-table-column label="命中值代码" align="center" prop="factorvaluecode" />
       <el-table-column label="命中值逻辑" align="center" prop="factorvaluename" />
-      <el-table-column label="状态" align="center" prop="status" />
+      <el-table-column label="状态" align="center" prop="status" >
+        <template slot-scope="scope">
+          <span>{{ getDictDataLabel(DICT_TYPE.SYS_COMMON_STATUS, scope.row.status) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
@@ -59,33 +71,32 @@
         <el-form-item label="规则号" prop="ruleno">
           <el-input v-model="form.ruleno" placeholder="请输入规则号"  :disabled="true" />
         </el-form-item>
-
-        <el-form-item label="因子类型" prop="factortype">
-          <el-select v-model="form.factortype" placeholder="请选择因子类型">
-            <el-option v-for="dict in  this.getDictDatas(DICT_TYPE.RULE_FACTOR_YPE)"
-                       :key="dict.label" :label="dict.value">
-              {{dict.label}}</el-option>
+        <el-form-item label="因子类型" prop="factortype" >
+          <el-select v-model="form.factortype" placeholder="请选择因子类型" clearable size="small" @change="handlefactorTypeSelect">
+            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_FACTOR_YPE)"
+                       :key="dict.value" :label="dict.label" :value="dict.value"/>
           </el-select>
-
         </el-form-item>
         <el-form-item label="命中逻辑" prop="judgetype">
           <el-select v-model="form.judgetype" placeholder="请选择命中逻辑">
-            <el-option v-for="dict in  this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)"
-                       :key="dict.label" :label="dict.value">
-              {{dict.label}}</el-option>
+            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)"
+                       :key="dict.value" :label="dict.label" :value="dict.value"/>
           </el-select>
         </el-form-item>
         <el-form-item label="因子代码" prop="factorcode">
-          <el-input v-model="form.factorcode" placeholder="请输入因子代码" />
+         <el-select v-model="form.factorcode" placeholder="请选择因子类型" @change="handlefactorCodeSelect">
+            <el-option v-for="f in factorOptions "
+                       :key="f.factorname" :label="f.factorname  " :value="f.factorcode"/>
+          </el-select>
         </el-form-item>
         <el-form-item label="因子名称" prop="factorname">
-          <el-input v-model="form.factorname" placeholder="请输入因子名称" />
+          <el-input v-model="form.factorname" placeholder="请输入因子名称" :disabled="true" />
         </el-form-item>
         <el-form-item label="命中值代码" prop="factorvaluecode">
           <el-input v-model="form.factorvaluecode" placeholder="请输入命中值代码" />
         </el-form-item>
-        <el-form-item label="命中值逻辑" prop="factorvaluename">
-          <el-input v-model="form.factorvaluename" placeholder="请输入命中值逻辑" />
+        <el-form-item label="命中值描述" prop="factorvaluename">
+          <el-input v-model="form.factorvaluename" placeholder="请输入命中值描述" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -98,6 +109,8 @@
 
 <script>
 import { create, update, del, get, getPage } from "@/api/ruleManage/ruleFactor";
+import { getListByMap} from "@/api/ruleManage/factor";
+
 import { getRulebyNo } from "@/api/ruleManage/rule";
 import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict'
 export default {
@@ -114,6 +127,8 @@ export default {
       total: 0,
       // 规则使用因子列表
       list: [],
+      // 选择因子下拉框
+      factorOptions: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -197,6 +212,20 @@ export default {
       };
       this.resetForm("form");
     },
+    handlefactorTypeSelect(){
+      let params = {};
+      params.factortype=this.form.factortype
+      getListByMap(params).then(response => {
+        this.factorOptions = response.data;
+      });
+    },
+    handlefactorCodeSelect(){
+      for (const factor of this.factorOptions) {
+        if (factor.factorcode === this.form.factorcode) {
+          this.form.factorname=factor.factorname;
+        }
+      }
+    },
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNo = 1;
@@ -213,6 +242,7 @@ export default {
       this.reset();
       this.open = true;
       this.title = "添加规则因子";
+
       this.form = {
         ruleid: this.mainPageData.ruleid,
         ruleno: this.mainPageData.ruleno,

@@ -32,7 +32,7 @@ export const DICT_TYPE = {
 
   RULE_FACTOR_JUDGETYPE:'rule_factor_judgetype',// 因子命中逻辑
   RULE_FACTOR_YPE:'rule_factor_type', //因子类型
-  RULE_PRIORITY:'rule_priority', //因子类型
+  RULE_PRIORITY:'rule_priority', //规则优先级
 }
 
 /**

@@ -54,4 +54,12 @@ export function exportExcel(query) {
 }
 
 
+export function getListByMap(query) {
+  return request({
+    url: '/ruleManage/factor/getListByMap',
+    method: 'get',
+    params: query,
+  })
+}
+
 

@@ -48,8 +48,10 @@
       </el-table-column>
 
       <el-table-column label="规则名称" align="center" prop="rulename" />
-      <el-table-column label="规则类型" align="center" prop="ruletype" />
-      <el-table-column label="优先级" align="center" prop="priority" />
+      <!--<el-table-column label="规则类型" align="center" prop="ruletype" />-->
+      <el-table-column label="优先级" align="center" prop="priority" >
+      </el-table-column>
+
       <el-table-column label="起始时间" align="center" prop="startdate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.startdate) }}</span>
@@ -88,17 +90,24 @@
         <el-form-item label="规则名称" prop="rulename">
           <el-input v-model="form.rulename" placeholder="请输入规则名称" />
         </el-form-item>
-        <el-form-item label="规则类型" prop="ruletype">
+       <!-- <el-form-item label="规则类型" prop="ruletype">
           <el-input v-model="form.ruletype" placeholder="请输入规则类型" />
-        </el-form-item>
+        </el-form-item>-->
+
+
         <el-form-item label="优先级" prop="priority">
-          <el-input v-model="form.priority" placeholder="请输入优先级" />
+          <el-select v-model="form.priority" placeholder="请输入优先级" clearable size="small">
+            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_PRIORITY)"
+                       :key="dict.value" :label="dict.label" :value="dict.value"/>
+          </el-select>
         </el-form-item>
+
+
         <el-form-item label="起始时间" prop="startdate">
-          <el-date-picker clearable size="small" v-model="form.startdate" type="date" value-format="yyyy-MM-dd" placeholder="选择起始时间" />
+          <el-date-picker clearable size="small" v-model="form.startdate"   type="date"  placeholder="选择起始时间" />
         </el-form-item>
         <el-form-item label="结束时间" prop="enddate">
-          <el-date-picker clearable size="small" v-model="form.enddate" type="date" value-format="yyyy-MM-dd" placeholder="选择结束时间" />
+          <el-date-picker clearable size="small" v-model="form.enddate"   type="date"  placeholder="选择结束时间" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -114,8 +123,8 @@ import { createRule, updateRule, deleteRule, getRule, getPage, exportExcel,getRu
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
-import {SysCommonStatusEnum} from '@/utils/constants'
-import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict'
+import {SysCommonStatusEnum} from '@/utils/constants';
+import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict';
 
 
 export default {
@@ -193,9 +202,9 @@ export default {
         rulename: undefined,
         ruletype: undefined,
         priority: undefined,
-        startdate: undefined,
-        enddate: undefined,
-        status: undefined,
+        startdate: null,
+        enddate: null,
+        status: SysCommonStatusEnum.ENABLE
       };
       this.resetForm("form");
     },
@@ -257,7 +266,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const id = row.id;
-      this.$confirm('是否确认删除规则管理编号为"' + id + '"的数据项?', "警告", {
+      const rulename = row.rulename;
+      this.$confirm('是否确认删除规则名称为"' + rulename + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

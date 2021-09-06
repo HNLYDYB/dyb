@@ -67,6 +67,6 @@ public interface FactorService {
      */
     List<FactorDO> getList(FactorExportReqVO exportReqVO);
 
-
+    List<FactorDO> getListByMap(Map map);
 
 }

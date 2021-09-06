@@ -15,7 +15,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -82,6 +84,10 @@ public class FactorServiceImpl implements FactorService {
         return factorMapper.selectList(exportReqVO);
     }
 
+    @Override
+    public List<FactorDO> getListByMap(Map map) {
+        return factorMapper.selectByMap(map);
+    }
 
 
 }

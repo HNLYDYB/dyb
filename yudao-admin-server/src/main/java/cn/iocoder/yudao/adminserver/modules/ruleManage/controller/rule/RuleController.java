@@ -69,7 +69,8 @@ public class RuleController {
     @PreAuthorize("@ss.hasPermission('ruleManage::query')")
     public CommonResult<RuleRespVO> getRule(@RequestParam("id") Long id) {
         RuleDO rule= ruleService.getRule(id);
-        return success(RuleConvert.INSTANCE.convert(rule));
+        RuleRespVO vo=RuleConvert.INSTANCE.convert(rule);
+        return success(vo);
     }
     @GetMapping("/getRulebyNo")
     @ApiOperation("获得规则管理")

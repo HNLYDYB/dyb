@@ -32,8 +32,11 @@
     <el-table v-loading="loading" :data="list" row-key="id">
       <el-table-column label="因子代码" align="center" prop="factorcode" />
       <el-table-column label="因子名称" align="center" prop="factorname" />
-      <el-table-column label="因子类型" align="center" prop="factortype" />
-
+      <el-table-column label="因子类型" align="center" prop="factortype" >
+        <template slot-scope="scope">
+          <span>{{ getDictDataLabel(DICT_TYPE.RULE_FACTOR_YPE, scope.row.factortype) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="状态" align="center" prop="status" >
         <template slot-scope="scope">
           <span>{{ getDictDataLabel(DICT_TYPE.SYS_COMMON_STATUS, scope.row.status) }}</span>
@@ -66,13 +69,14 @@
         <el-form-item label="因子名称" prop="factorname">
           <el-input v-model="form.factorname" placeholder="请输入因子名称" />
         </el-form-item>
+
         <el-form-item label="因子类型" prop="factortype">
-          <el-input v-model="form.factortype" placeholder="请选择因子类型">
-          </el-input>
+          <el-select v-model="form.factortype" placeholder="请选择因子类型" clearable size="small">
+            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_FACTOR_YPE)"
+                       :key="dict.value" :label="dict.label" :value="dict.value"/>
+          </el-select>
         </el-form-item>
-        <el-form-item label="显示顺序" prop="sort">
-          <el-input v-model="form.sort" placeholder="请输入显示顺序" />
-        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -84,7 +88,9 @@
 
 <script>
 import { create, update, deletefactor, get, getList,getPage, exportExcel } from "@/api/ruleManage/factor";
-import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict'
+
+import { getDictDataLabel, getDictDatas, DICT_TYPE } from '@/utils/dict';
+
 export default {
   name: "",
   components: {

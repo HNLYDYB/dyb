@@ -1,5 +1,7 @@
-package cn.iocoder.yudao.adminserver.modules.factor.controller.factor;
+package cn.iocoder.yudao.adminserver.modules.ruleManage.controller.factor;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.cglib.beans.BeanMap;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
@@ -99,5 +101,21 @@ public class FactorController {
     }
 
 
-
+    @GetMapping("/getListByMap")
+    @ApiOperation("获得因子配置列表")
+    @ApiImplicitParam(name = "ids", value = "编号列表", required = true, example = "1024,2048", dataTypeClass = List.class)
+    @PreAuthorize("@ss.hasPermission('factor::query')")
+    public CommonResult<List<FactorRespVO>> getListByMap(@Valid FactorRespVO  factorRespVO) {
+        Map<String, Object> map = new HashMap();
+        if (factorRespVO != null) {
+            BeanMap beanMap = BeanMap.create(factorRespVO);
+            for (Object key : beanMap.keySet()) {
+              if(null!= beanMap.get(key)){
+                  map.put(key + "", beanMap.get(key));
+              }
+            }
+        }
+        List<FactorDO> list = Service.getListByMap(map);
+        return success(FactorConvert.INSTANCE.convertList(list));
+    }
 }
