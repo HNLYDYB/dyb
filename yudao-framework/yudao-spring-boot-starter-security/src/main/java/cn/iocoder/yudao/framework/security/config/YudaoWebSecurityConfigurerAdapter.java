@@ -139,6 +139,7 @@ public class YudaoWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
                     .antMatchers("/swagger-resources/**").anonymous()
                     .antMatchers("/webjars/**").anonymous()
                     .antMatchers("/*/api-docs").anonymous()
+                .antMatchers("/ruleCalculate").anonymous()
                    // .antMatchers("/ruleCalculateServlet").anonymous() //接口可以匿名访问
                     // Spring Boot Admin Server 的安全配置 TODO dyb：需要抽象出去
                     .antMatchers(adminSeverContextPath).anonymous()

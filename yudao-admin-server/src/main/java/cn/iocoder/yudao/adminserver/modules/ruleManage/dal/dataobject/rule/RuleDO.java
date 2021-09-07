@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.adminserver.modules.ruleManage.dal.dataobject.rule;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import java.util.*;
 import com.baomidou.mybatisplus.annotation.*;
@@ -36,6 +37,8 @@ public class RuleDO extends BaseDO {
      * 规则类型
      */
     private String ruletype;
+
+    private String ruleresult;
     /**
      * 优先级
      */

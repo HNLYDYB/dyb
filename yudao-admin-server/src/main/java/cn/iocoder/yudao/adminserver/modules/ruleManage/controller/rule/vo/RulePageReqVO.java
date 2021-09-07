@@ -23,6 +23,8 @@ public class RulePageReqVO extends PageParam {
     @ApiModelProperty(value = "规则类型")
     private String ruletype;
 
+    @ApiModelProperty(value = "规则返回结果")
+    private String ruleresult;
     @ApiModelProperty(value = "优先级")
     private String priority;
 
