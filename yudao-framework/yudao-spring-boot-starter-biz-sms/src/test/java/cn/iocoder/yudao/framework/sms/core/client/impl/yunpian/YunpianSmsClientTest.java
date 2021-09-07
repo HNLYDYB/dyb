@@ -37,7 +37,7 @@ import static org.mockito.Mockito.*;
 /**
  * 对 {@link YunpianSmsClient} 的单元测试
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class YunpianSmsClientTest extends BaseMockitoUnitTest {
 

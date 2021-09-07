@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * API 错误日志创建 DTO
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Data
 @Accessors(chain = true)

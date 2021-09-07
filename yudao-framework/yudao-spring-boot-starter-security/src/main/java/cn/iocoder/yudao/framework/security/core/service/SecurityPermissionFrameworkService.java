@@ -3,7 +3,7 @@ package cn.iocoder.yudao.framework.security.core.service;
 /**
  * Security 框架 Permission Service 接口，定义 security 组件需要的功能
  *
- * @author 芋道源码
+ * @author dyb
  */
 public interface SecurityPermissionFrameworkService {
 

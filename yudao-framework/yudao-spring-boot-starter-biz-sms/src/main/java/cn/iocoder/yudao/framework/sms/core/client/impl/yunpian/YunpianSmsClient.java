@@ -152,7 +152,7 @@ public class YunpianSmsClient extends AbstractSmsClient {
      *
      * 参见 https://www.yunpian.com/official/document/sms/zh_cn/domestic_push_report 文档
      *
-     * @author 芋道源码
+     * @author dyb
      */
     @Data
     public static class SmsReceiveStatus {

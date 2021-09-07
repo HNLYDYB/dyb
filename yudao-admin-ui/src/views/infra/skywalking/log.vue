@@ -8,7 +8,7 @@ export default {
   name: "SkyWalking-Log",
   data() {
     return {
-      src: "http://skywalking.shop.iocoder.cn/log", // TODO 芋艿，后续改成配置读取
+      src: "http://skywalking.shop.iocoder.cn/log",
       height: document.documentElement.clientHeight - 94.5 + "px;",
       loading: true
     };

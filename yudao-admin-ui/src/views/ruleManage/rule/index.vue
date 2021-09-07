@@ -9,6 +9,9 @@
       <el-form-item label="规则名称" prop="rulename">
         <el-input v-model="queryParams.rulename" placeholder="请输入规则名称" clearable size="small" @keyup.enter.native="handleQuery"/>
       </el-form-item>
+      <el-form-item label="规则类型" prop="ruletype">
+        <el-input v-model="queryParams.ruletype" placeholder="请输入规则类型" clearable size="small" @keyup.enter.native="handleQuery"/>
+      </el-form-item>
       <el-form-item label="优先级" prop="priority">
         <el-input v-model="queryParams.priority" placeholder="请输入优先级" clearable size="small" @keyup.enter.native="handleQuery"/>
       </el-form-item>
@@ -48,10 +51,10 @@
       </el-table-column>
 
       <el-table-column label="规则名称" align="center" prop="rulename" />
-      <!--<el-table-column label="规则类型" align="center" prop="ruletype" />-->
+      <el-table-column label="规则类型" align="center" prop="ruletype" />
       <el-table-column label="优先级" align="center" prop="priority" >
       </el-table-column>
-
+      <el-table-column label="规则返回结果" align="center" prop="ruleresult" />
       <el-table-column label="起始时间" align="center" prop="startdate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.startdate) }}</span>
@@ -90,9 +93,9 @@
         <el-form-item label="规则名称" prop="rulename">
           <el-input v-model="form.rulename" placeholder="请输入规则名称" />
         </el-form-item>
-       <!-- <el-form-item label="规则类型" prop="ruletype">
+        <el-form-item label="规则类型" prop="ruletype">
           <el-input v-model="form.ruletype" placeholder="请输入规则类型" />
-        </el-form-item>-->
+        </el-form-item>
 
 
         <el-form-item label="优先级" prop="priority">
@@ -109,6 +112,12 @@
         <el-form-item label="结束时间" prop="enddate">
           <el-date-picker clearable size="small" v-model="form.enddate"   type="date"  placeholder="选择结束时间" />
         </el-form-item>
+
+        <el-form-item label="规则返回结果" prop="ruleresult">
+          <el-input v-model="form.ruleresult" placeholder="请输入规则返回结果" />
+        </el-form-item>
+
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -204,6 +213,7 @@ export default {
         priority: undefined,
         startdate: null,
         enddate: null,
+        ruleresult: undefined,
         status: SysCommonStatusEnum.ENABLE
       };
       this.resetForm("form");
@@ -228,7 +238,7 @@ export default {
         this.form.ruleno = response.data.ruleno;
       });
       this.open = true;
-      this.title = "添加规则管理";
+      this.title = "添加规则";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -237,7 +247,7 @@ export default {
       getRule(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改规则管理";
+        this.title = "修改规则";
       });
     },
     /** 提交按钮 */
@@ -288,7 +298,7 @@ export default {
       this.addBeginAndEndTime(params, this.dateRangeEnddate, 'enddate');
       this.addBeginAndEndTime(params, this.dateRangeCreateTime, 'createTime');
       // 执行导出
-      this.$confirm('是否确认导出所有规则管理数据项?', "警告", {
+      this.$confirm('是否确认导出所有规则数据项?', "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"

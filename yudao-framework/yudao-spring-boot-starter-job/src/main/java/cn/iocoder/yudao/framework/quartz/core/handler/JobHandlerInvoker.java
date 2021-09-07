@@ -21,7 +21,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.diff;
 /**
  * 基础 Job 调用者，负责调用 {@link JobHandler#execute(String)} 执行任务
  *
- * @author 芋道源码
+ * @author dyb
  */
 @DisallowConcurrentExecution
 @PersistJobDataAfterExecution

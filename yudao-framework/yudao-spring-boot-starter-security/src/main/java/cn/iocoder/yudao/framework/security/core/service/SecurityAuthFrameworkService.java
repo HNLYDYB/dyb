@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 /**
  * Security 框架 Auth Service 接口，定义 security 组件需要的功能
  *
- * @author 芋道源码
+ * @author dyb
  */
 public interface SecurityAuthFrameworkService extends UserDetailsService {
 

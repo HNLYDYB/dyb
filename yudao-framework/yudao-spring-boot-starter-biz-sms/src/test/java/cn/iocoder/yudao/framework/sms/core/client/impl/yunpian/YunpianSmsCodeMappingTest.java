@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * {@link YunpianSmsCodeMapping} 的单元测试
  *
- * @author 芋道源码
+ * @author dyb
  */
 class YunpianSmsCodeMappingTest extends BaseMockitoUnitTest {
 

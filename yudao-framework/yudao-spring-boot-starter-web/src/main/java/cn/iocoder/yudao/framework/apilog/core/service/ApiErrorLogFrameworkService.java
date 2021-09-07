@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
 /**
  * API 错误日志 Framework Service 接口
  *
- * @author 芋道源码
+ * @author dyb
  */
 public interface ApiErrorLogFrameworkService {
 

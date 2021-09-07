@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MyBaits 配置类
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Configuration
 @MapperScan(value = "${yudao.info.base-package}", annotationClass = Mapper.class,

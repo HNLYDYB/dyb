@@ -25,7 +25,7 @@ public class YunpianSmsClientIntegrationTest {
         // 创建配置类
         SmsChannelProperties properties = new SmsChannelProperties();
         properties.setId(1L);
-        properties.setSignature("芋道");
+        properties.setSignature("dyb");
         properties.setCode(SmsChannelEnum.YUN_PIAN.getCode());
         properties.setApiKey("1555a14277cb8a608cf45a9e6a80d510");
         // 创建客户端

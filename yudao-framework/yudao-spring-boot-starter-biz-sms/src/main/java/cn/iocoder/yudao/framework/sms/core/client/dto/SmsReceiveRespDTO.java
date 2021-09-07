@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * 消息接收 Response DTO
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Data
 public class SmsReceiveRespDTO {

@@ -11,7 +11,7 @@ import com.ctrip.framework.apollo.spi.ConfigFactory;
 /**
  * 基于 DB 的 ConfigFactory 实现类
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class DBConfigFactory implements ConfigFactory {
 

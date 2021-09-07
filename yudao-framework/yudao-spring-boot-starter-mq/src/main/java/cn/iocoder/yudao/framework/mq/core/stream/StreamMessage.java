@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * Redis Stream Message 接口
  *
- * @author 芋道源码
+ * @author dyb
  */
 public interface StreamMessage {
 

@@ -77,12 +77,7 @@
                        :key="dict.value" :label="dict.label" :value="dict.value"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="命中逻辑" prop="judgetype">
-          <el-select v-model="form.judgetype" placeholder="请选择命中逻辑">
-            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)"
-                       :key="dict.value" :label="dict.label" :value="dict.value"/>
-          </el-select>
-        </el-form-item>
+
         <el-form-item label="因子代码" prop="factorcode">
          <el-select v-model="form.factorcode" placeholder="请选择因子类型" @change="handlefactorCodeSelect">
             <el-option v-for="f in factorOptions "
@@ -91,6 +86,12 @@
         </el-form-item>
         <el-form-item label="因子名称" prop="factorname">
           <el-input v-model="form.factorname" placeholder="请输入因子名称" :disabled="true" />
+        </el-form-item>
+        <el-form-item label="命中逻辑" prop="judgetype">
+          <el-select v-model="form.judgetype" placeholder="请选择命中逻辑">
+            <el-option v-for="dict in this.getDictDatas(DICT_TYPE.RULE_FACTOR_JUDGETYPE)"
+                       :key="dict.value" :label="dict.label" :value="dict.value"/>
+          </el-select>
         </el-form-item>
         <el-form-item label="命中值代码" prop="factorvaluecode">
           <el-input v-model="form.factorvaluecode" placeholder="请输入命中值代码" />

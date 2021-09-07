@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 /**
  * Array 工具类
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class ArrayUtils {
 

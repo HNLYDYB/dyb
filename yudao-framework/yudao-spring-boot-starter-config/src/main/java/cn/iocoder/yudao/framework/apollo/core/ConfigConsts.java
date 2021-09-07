@@ -7,7 +7,7 @@ import cn.iocoder.yudao.framework.apollo.internals.ConfigFrameworkDAO;
  *
  * 1. apollo.jdbc.* 配置项的枚举
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class ConfigConsts {
 

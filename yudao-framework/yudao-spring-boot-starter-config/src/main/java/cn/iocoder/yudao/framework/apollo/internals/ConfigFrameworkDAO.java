@@ -10,7 +10,7 @@ import java.util.List;
  *
  * 注意，实现类必须提供 (String jdbcUrl, String username, String password) 构造方法
  *
- * @author 芋道源码
+ * @author dyb
  */
 public interface ConfigFrameworkDAO {
 

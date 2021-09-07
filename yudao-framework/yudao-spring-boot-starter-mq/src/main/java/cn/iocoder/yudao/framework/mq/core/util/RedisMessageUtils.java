@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 /**
  * Redis 消息工具类
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class RedisMessageUtils {
 

@@ -12,7 +12,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
  *
  * 1. 将自定义的 apollo.jdbc 设置到 System 变量中
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class ApolloApplicationContextInitializer implements EnvironmentPostProcessor, Ordered {
 

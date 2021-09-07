@@ -12,7 +12,7 @@ import static com.yunpian.sdk.constant.Code.*;
  * <p>
  * 参见 https://www.yunpian.com/official/document/sms/zh_CN/returnvalue_common 文档
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class YunpianSmsCodeMapping implements SmsCodeMapping {
 

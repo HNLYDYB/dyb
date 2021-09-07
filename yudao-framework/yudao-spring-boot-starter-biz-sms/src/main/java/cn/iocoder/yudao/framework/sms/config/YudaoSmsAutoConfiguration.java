@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 短信配置类
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Configuration
 public class YudaoSmsAutoConfiguration {

@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * 消息队列配置类
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Configuration
 @AutoConfigureAfter(YudaoRedisAutoConfiguration.class)

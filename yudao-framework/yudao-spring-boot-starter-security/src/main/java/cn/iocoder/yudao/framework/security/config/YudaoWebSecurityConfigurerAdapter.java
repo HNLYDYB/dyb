@@ -32,7 +32,7 @@ import javax.annotation.Resource;
 /**
  * 自定义的 Spring Security 配置适配器实现
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -128,7 +128,7 @@ public class YudaoWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
                 .authorizeRequests()
                     // 登陆的接口，可匿名访问
                     .antMatchers(api("/login")).anonymous()
-                    // 通用的接口，可匿名访问 TODO 芋艿：需要抽象出去
+                    // 通用的接口，可匿名访问 TODO dyb：需要抽象出去
                     .antMatchers(api("/system/captcha/**")).anonymous()
                     // 静态资源，可匿名访问
                     .antMatchers(HttpMethod.GET, "/*.html", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
@@ -139,15 +139,16 @@ public class YudaoWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdap
                     .antMatchers("/swagger-resources/**").anonymous()
                     .antMatchers("/webjars/**").anonymous()
                     .antMatchers("/*/api-docs").anonymous()
-                    // Spring Boot Admin Server 的安全配置 TODO 芋艿：需要抽象出去
+                   // .antMatchers("/ruleCalculateServlet").anonymous() //接口可以匿名访问
+                    // Spring Boot Admin Server 的安全配置 TODO dyb：需要抽象出去
                     .antMatchers(adminSeverContextPath).anonymous()
                     .antMatchers(adminSeverContextPath + "/**").anonymous()
                     // Spring Boot Actuator 的安全配置
                     .antMatchers("/actuator").anonymous()
                     .antMatchers("/actuator/**").anonymous()
-                    // Druid 监控 TODO 芋艿：需要抽象出去
+                    // Druid 监控 TODO dyb：需要抽象出去
                     .antMatchers("/druid/**").anonymous()
-                    // 短信回调 API TODO 芋艿：需要抽象出去
+                    // 短信回调 API TODO dyb：需要抽象出去
                     .antMatchers(api("/system/sms/callback/**")).anonymous()
                     // 除上面外的所有请求全部需要鉴权认证
                     .anyRequest().authenticated()

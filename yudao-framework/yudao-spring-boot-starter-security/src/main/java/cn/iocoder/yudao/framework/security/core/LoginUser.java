@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * 登陆用户信息
  *
- * @author 芋道源码
+ * @author dyb
  */
 @Data
 public class LoginUser implements UserDetails {

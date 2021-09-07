@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 专属于 web 包的工具类
  *
- * @author 芋道源码
+ * @author dyb
  */
 public class WebFrameworkUtils {
 
@@ -43,7 +43,7 @@ public class WebFrameworkUtils {
     }
 
     public static Integer getUserType(HttpServletRequest request) {
-        return UserTypeEnum.ADMIN.getValue(); // TODO 芋艿：等后续优化
+        return UserTypeEnum.ADMIN.getValue(); // TODO dyb：等后续优化
     }
 
     public static void setCommonResult(ServletRequest request, CommonResult<?> result) {

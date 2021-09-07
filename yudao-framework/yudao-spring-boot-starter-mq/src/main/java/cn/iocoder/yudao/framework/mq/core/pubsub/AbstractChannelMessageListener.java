@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
  *
  * @param <T> 消息类型。一定要填写噢，不然会报错
  *
- * @author 芋道源码
+ * @author dyb
  */
 public abstract class AbstractChannelMessageListener<T extends ChannelMessage> implements MessageListener {
 

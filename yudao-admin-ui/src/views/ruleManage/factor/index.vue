@@ -170,7 +170,7 @@ export default {
       this.reset();
 
       this.open = true;
-      this.title = "添加因子配置";
+      this.title = "添加因子";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -180,7 +180,7 @@ export default {
       get(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改因子配置";
+        this.title = "修改因子";
       });
     },
     /** 提交按钮 */
@@ -209,7 +209,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const id = row.id;
-      this.$confirm('是否确认删除因子配置编号为"' + id + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除因子编号为"' + id + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
@@ -228,14 +228,14 @@ export default {
       params.pageSize = undefined;
       this.addBeginAndEndTime(params, this.dateRangeCreateTime, 'createTime');
       // 执行导出
-      this.$confirm('是否确认导出所有因子配置数据项?', "警告", {
+      this.$confirm('是否确认导出所有因子数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
           return exportExcel(params);
         }).then(response => {
-          this.downloadExcel(response, '因子配置.xls');
+          this.downloadExcel(response, '因子.xls');
         })
     },
 
